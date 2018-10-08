@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,27 +40,25 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
         mCurrencyAbbreviation.setText(item.getAbbreviation());
         mCurrencyName.setText(item.getFullName());
         mCurrencyAmount.setText(String.format(Locale.ENGLISH, "%." + 2 + "f", item.getValue()));
+        mCurrencyAmount.setSelection(mCurrencyAmount.getText().length());
 
         mMainView.setOnClickListener(view -> mClick.onClick(mCurrencyAbbreviation.getText().toString()));
 
-        if(getAdapterPosition() == 0) {
-            mCurrencyAmount.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    Log.d(CURRENCY_VIEW_HOLDER_TAG, "beforeTextChanged: called");
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    //mClick.onChangeAmountClick(charSequence.toString());
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    Log.d(CURRENCY_VIEW_HOLDER_TAG, "afterTextChanged: called");
-                }
-            });
-        }
-
+//        mCurrencyAmount.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                Log.d(CURRENCY_VIEW_HOLDER_TAG, "beforeTextChanged: called");
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                Log.d(CURRENCY_VIEW_HOLDER_TAG, "onTextChanged: called");
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                Log.d(CURRENCY_VIEW_HOLDER_TAG, "afterTextChanged: called");
+//            }
+//        });
     }
 }
