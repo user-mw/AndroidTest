@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.test.androidtest.MainApplication;
 import com.test.androidtest.R;
@@ -47,22 +48,5 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
         mCurrencyAmount.setSelection(mCurrencyAmount.getText().length());
 
         mMainView.setOnClickListener(view -> mClick.onClick(mCurrencyAbbreviation.getText().toString()));
-
-//        mCurrencyAmount.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                Log.d(CURRENCY_VIEW_HOLDER_TAG, "beforeTextChanged: called");
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                Log.d(CURRENCY_VIEW_HOLDER_TAG, "onTextChanged: called");
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                Log.d(CURRENCY_VIEW_HOLDER_TAG, "afterTextChanged: called");
-//            }
-//        });
     }
 }

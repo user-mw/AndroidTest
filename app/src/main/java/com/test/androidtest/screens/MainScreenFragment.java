@@ -32,11 +32,6 @@ public class MainScreenFragment extends Fragment {
         public void onClick(String newBaseCurrency) {
             mViewModel.changeBaseCurrency(newBaseCurrency);
         }
-
-        @Override
-        public void onChangeAmountClick(String newAmount) {
-            mViewModel.changeAmount(newAmount);
-        }
     };
 
     public static MainScreenFragment newInstance() {
