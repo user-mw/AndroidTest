@@ -2,23 +2,14 @@ package com.test.androidtest.screens;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.test.androidtest.MainApplication;
 import com.test.androidtest.R;
 import com.test.androidtest.model.CurrencyItem;
 import com.test.androidtest.utils.CurrenciesStringUtil;
-
-import java.util.Locale;
-
-import javax.inject.Inject;
 
 public class CurrencyViewHolder extends RecyclerView.ViewHolder {
 

@@ -8,7 +8,6 @@ import android.util.Log;
 import com.test.androidtest.model.CurrencyItem;
 import com.test.androidtest.model.IRepository;
 import com.test.androidtest.preferences.IPreferencesRepository;
-import com.test.androidtest.utils.CurrenciesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
