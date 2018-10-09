@@ -86,7 +86,6 @@ public class MainScreenFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //mViewModel.loadData();
         mViewModel.loadNewData();
     }
 
