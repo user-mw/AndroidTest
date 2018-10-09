@@ -8,6 +8,7 @@ import android.util.Log;
 import com.test.androidtest.model.CurrencyItem;
 import com.test.androidtest.model.IRepository;
 import com.test.androidtest.preferences.IPreferencesRepository;
+import com.test.androidtest.utils.CurrenciesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,17 +91,14 @@ public class MainScreenViewModel extends ViewModel {
                 });
     }
 
-    public void changeBaseCurrency(String newBaseCurrency) {
+    public void changeBaseCurrency(String newBaseCurrency, String amount) {
         mPreferencesRepository.changeBaseCurrencyValue(newBaseCurrency);
+        double rightAmount = CurrenciesUtil.generateRightAmount(amount);
+        mPreferencesRepository.changeBaseCurrencyAmount(rightAmount);
     }
 
     public void changeAmount(String newAmount) {
-        double amount = 0;
-
-        if(!TextUtils.isEmpty(newAmount)) {
-            amount  = Double.parseDouble(newAmount);
-        }
-
+        double amount = CurrenciesUtil.generateRightAmount(newAmount);
         mPreferencesRepository.changeBaseCurrencyAmount(amount);
     }
 

@@ -29,8 +29,8 @@ public class MainScreenFragment extends Fragment {
     private CurrenciesAdapter mCurrenciesAdapter;
     private CurrenciesAdapter.IOnItemClick mOnItemClick = new CurrenciesAdapter.IOnItemClick() {
         @Override
-        public void onClick(String newBaseCurrency) {
-            mViewModel.changeBaseCurrency(newBaseCurrency);
+        public void onClick(String newBaseCurrency, String currencyAmount) {
+            mViewModel.changeBaseCurrency(newBaseCurrency, currencyAmount);
         }
     };
 

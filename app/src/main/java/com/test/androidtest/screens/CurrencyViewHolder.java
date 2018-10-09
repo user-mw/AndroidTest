@@ -63,7 +63,12 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
         mOnItemChangeAmount = onItemChangeAmount;
 
 
-        mMainView.setOnClickListener(view -> mOnItemClick.onClick(mCurrencyAbbreviation.getText().toString()));
+        mMainView.setOnClickListener(view -> {
+            String abbreviation = mCurrencyAbbreviation.getText().toString();
+            String amount = mCurrencyAmount.getText().toString();
+
+            mOnItemClick.onClick(abbreviation, amount);
+        });
 
         if(getAdapterPosition() == 0) {
             mCurrencyAmount.removeTextChangedListener(mCustomTextChangedListener);
