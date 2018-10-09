@@ -6,7 +6,6 @@ import com.test.androidtest.dependencies.ApplicationModule;
 import com.test.androidtest.dependencies.DaggerIApplicationComponent;
 import com.test.androidtest.dependencies.IApplicationComponent;
 import com.test.androidtest.dependencies.PreferencesModule;
-import com.test.androidtest.dependencies.RepositoryModule;
 
 public class MainApplication extends Application {
 

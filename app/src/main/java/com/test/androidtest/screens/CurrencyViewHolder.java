@@ -10,10 +10,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.test.androidtest.MainApplication;
 import com.test.androidtest.R;
 import com.test.androidtest.model.CurrencyItem;
+import com.test.androidtest.utils.CurrenciesStringUtil;
 
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 public class CurrencyViewHolder extends RecyclerView.ViewHolder {
 
@@ -39,7 +43,7 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
     public void bind(CurrencyItem item, CurrenciesAdapter.IOnItemClick mClick) {
         mCurrencyAbbreviation.setText(item.getAbbreviation());
         mCurrencyName.setText(item.getFullName());
-        mCurrencyAmount.setText(String.format(Locale.ENGLISH, "%." + 2 + "f", item.getValue()));
+        mCurrencyAmount.setText(CurrenciesStringUtil.generateAmountString(item.getValue()));
         mCurrencyAmount.setSelection(mCurrencyAmount.getText().length());
 
         mMainView.setOnClickListener(view -> mClick.onClick(mCurrencyAbbreviation.getText().toString()));

@@ -36,9 +36,6 @@ public class MainScreenViewModel extends ViewModel {
     @Inject
     IPreferencesRepository mPreferencesRepository;
 
-    @Inject
-    CurrenciesUtil mCurrenciesUtil;
-
     private MutableLiveData<String> mSimpleTitle = new MutableLiveData<>();
     private MutableLiveData<List<CurrencyItem>> mCurrencies = new MutableLiveData<>();
     private ScheduledExecutorService mExecutorService;
