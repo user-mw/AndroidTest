@@ -2,6 +2,9 @@ package com.test.androidtest.screens;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +23,25 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
     private TextView mCurrencyAbbreviation;
     private TextView mCurrencyName;
     private EditText mCurrencyAmount;
+    private CurrenciesAdapter.IOnItemClick mOnItemClick;
+    private CurrenciesAdapter.IOnItemChangeAmount mOnItemChangeAmount;
+
+    private TextWatcher mCustomTextChangedListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            Log.d(CURRENCY_VIEW_HOLDER_TAG, "beforeTextChanged: called");
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            Log.d(CURRENCY_VIEW_HOLDER_TAG, "onTextChanged: called");
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            mOnItemChangeAmount.onChangeAmount(editable.toString());
+        }
+    };
 
     public CurrencyViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -32,12 +54,20 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
         mCurrencyAmount = itemView.findViewById(R.id.currency_amount);
     }
 
-    public void bind(CurrencyItem item, CurrenciesAdapter.IOnItemClick mClick) {
+    public void bind(CurrencyItem item, CurrenciesAdapter.IOnItemClick clickListener, CurrenciesAdapter.IOnItemChangeAmount onItemChangeAmount) {
         mCurrencyAbbreviation.setText(item.getAbbreviation());
         mCurrencyName.setText(item.getFullName());
         mCurrencyAmount.setText(CurrenciesStringUtil.generateAmountString(item.getValue()));
         mCurrencyAmount.setSelection(mCurrencyAmount.getText().length());
+        mOnItemClick = clickListener;
+        mOnItemChangeAmount = onItemChangeAmount;
 
-        mMainView.setOnClickListener(view -> mClick.onClick(mCurrencyAbbreviation.getText().toString()));
+
+        mMainView.setOnClickListener(view -> mOnItemClick.onClick(mCurrencyAbbreviation.getText().toString()));
+
+        if(getAdapterPosition() == 0) {
+            mCurrencyAmount.removeTextChangedListener(mCustomTextChangedListener);
+            mCurrencyAmount.addTextChangedListener(mCustomTextChangedListener);
+        }
     }
 }

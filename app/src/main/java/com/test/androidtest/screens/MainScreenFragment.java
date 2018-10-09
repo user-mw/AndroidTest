@@ -34,6 +34,13 @@ public class MainScreenFragment extends Fragment {
         }
     };
 
+    private CurrenciesAdapter.IOnItemChangeAmount mOnItemChangeAmount = new CurrenciesAdapter.IOnItemChangeAmount() {
+        @Override
+        public void onChangeAmount(String newAmount) {
+            mViewModel.changeAmount(newAmount);
+        }
+    };
+
     public static MainScreenFragment newInstance() {
         Bundle args = new Bundle();
 
@@ -53,7 +60,7 @@ public class MainScreenFragment extends Fragment {
         mCurrenciesAdapter = new CurrenciesAdapter();
 
         DaggerIItemComponent.builder()
-                .itemModule(new ItemModule(mOnItemClick))
+                .itemModule(new ItemModule(mOnItemClick, mOnItemChangeAmount))
                 .build()
                 .inject(mCurrenciesAdapter);
     }

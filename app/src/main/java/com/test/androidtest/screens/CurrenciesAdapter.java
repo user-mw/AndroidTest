@@ -19,6 +19,9 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrencyViewHolder> 
     @Inject
     public IOnItemClick mItemClick;
 
+    @Inject
+    public IOnItemChangeAmount mOnItemChangeAmount;
+
     private List<CurrencyItem> mCurrencyItems = new ArrayList<>();
 
     @Inject
@@ -37,7 +40,12 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrencyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull CurrencyViewHolder currencyViewHolder, int i) {
-        currencyViewHolder.bind(mCurrencyItems.get(i), mItemClick);
+        currencyViewHolder.bind(mCurrencyItems.get(i), mItemClick, mOnItemChangeAmount);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -64,5 +72,9 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrencyViewHolder> 
 
     public interface IOnItemClick {
         void onClick(String newBaseCurrency);
+    }
+
+    public interface IOnItemChangeAmount {
+        void onChangeAmount(String newAmount);
     }
 }
