@@ -36,13 +36,12 @@ public class MainScreenViewModel extends ViewModel {
     @Inject
     IPreferencesRepository mPreferencesRepository;
 
-    private MutableLiveData<String> mSimpleTitle = new MutableLiveData<>();
     private MutableLiveData<List<CurrencyItem>> mCurrencies = new MutableLiveData<>();
     private ScheduledExecutorService mExecutorService;
 
     @Inject
     public MainScreenViewModel() {
-        mSimpleTitle.postValue("Title");
+
     }
 
     public void loadNewData() {
@@ -108,10 +107,6 @@ public class MainScreenViewModel extends ViewModel {
 
     public void detach() {
         mExecutorService.shutdownNow();
-    }
-
-    public MutableLiveData<String> getSimpleTitle() {
-        return mSimpleTitle;
     }
 
     public MutableLiveData<List<CurrencyItem>> getCurrencies() {

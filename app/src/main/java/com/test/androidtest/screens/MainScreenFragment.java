@@ -27,7 +27,6 @@ public class MainScreenFragment extends Fragment {
 
     private RecyclerView mCurrenciesRecycler;
     private CurrenciesAdapter mCurrenciesAdapter;
-    private TextView mSimpleTitle;
     private CurrenciesAdapter.IOnItemClick mOnItemClick = new CurrenciesAdapter.IOnItemClick() {
         @Override
         public void onClick(String newBaseCurrency) {
@@ -73,12 +72,10 @@ public class MainScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mCurrenciesRecycler = view.findViewById(R.id.currencies_recycler);
-        mSimpleTitle = view.findViewById(R.id.simple_title_tv);
 
         mCurrenciesRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mCurrenciesRecycler.setAdapter(mCurrenciesAdapter);
 
-        mViewModel.getSimpleTitle().observe(this, title -> mSimpleTitle.setText(title));
         mViewModel.getCurrencies().observe(this, currencies -> {
             if(currencies != null && currencies.size() > 0) {
                 mCurrenciesAdapter.addData(currencies);
