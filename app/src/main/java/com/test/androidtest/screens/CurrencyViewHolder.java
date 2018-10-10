@@ -34,8 +34,6 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            Log.d(CURRENCY_VIEW_HOLDER_TAG, "onTextChanged: called");
-
             if(mCurrencyAmount.getText().length() > 0 && mCurrencyAmount.getText().charAt(0) == '0') {
                 if(charSequence.length() > 1 && charSequence.toString().charAt(0) == '0' && charSequence.toString().charAt(1) != '.') {
                     mCurrencyAmount.setText(String.valueOf(charSequence.toString().charAt(1)));
