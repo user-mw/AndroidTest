@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="24dp">
 
     <ImageView
         android:id="@+id/flag"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_alignParentStart="true"/>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_toEndOf="@+id/flag"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/currency_abbreviation"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"/>
 
         <TextView
             android:id="@+id/currency_name"
@@ -31,11 +31,12 @@
     
     <EditText
         android:id="@+id/currency_amount"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="7"
+        android:layout_alignParentEnd="true"
+        android:minWidth="24dp"
         android:textAlignment="textEnd"
         android:inputType="numberDecimal"
         android:hint="@string/default_hint_for_amount" />
 
-</LinearLayout>
+</RelativeLayout>
