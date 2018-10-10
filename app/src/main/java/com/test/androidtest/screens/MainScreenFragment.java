@@ -1,6 +1,8 @@
 package com.test.androidtest.screens;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +20,8 @@ import com.test.androidtest.dependencies.DaggerIItemComponent;
 import com.test.androidtest.dependencies.ItemModule;
 import com.test.androidtest.dependencies.ViewModelModule;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 public class MainScreenFragment extends Fragment {
@@ -33,6 +37,8 @@ public class MainScreenFragment extends Fragment {
             mViewModel.changeBaseCurrency(newBaseCurrency, currencyAmount);
         }
     };
+    private HashMap<String, String> mCurrenciesNames = new HashMap<>();
+    private HashMap<String, Drawable> mCurrenciesFlags = new HashMap<>();
 
     private CurrenciesAdapter.IOnItemChangeAmount mOnItemChangeAmount = new CurrenciesAdapter.IOnItemChangeAmount() {
         @Override
@@ -59,8 +65,9 @@ public class MainScreenFragment extends Fragment {
 
         mCurrenciesAdapter = new CurrenciesAdapter();
 
+        fillHashMaps();
         DaggerIItemComponent.builder()
-                .itemModule(new ItemModule(mOnItemClick, mOnItemChangeAmount))
+                .itemModule(new ItemModule(mOnItemClick, mOnItemChangeAmount, mCurrenciesNames, mCurrenciesFlags))
                 .build()
                 .inject(mCurrenciesAdapter);
     }
@@ -95,5 +102,26 @@ public class MainScreenFragment extends Fragment {
     public void onStop() {
         super.onStop();
         mViewModel.detach();
+    }
+
+    private void fillHashMaps() {
+        String[] abbreviations;
+        String[] fullNames;
+        TypedArray flags;
+
+
+        if(getActivity() != null) {
+            abbreviations = getActivity().getResources().getStringArray(R.array.abbreviations_array);
+            fullNames = getActivity().getResources().getStringArray(R.array.full_names_array);
+            flags = getActivity().getResources().obtainTypedArray(R.array.flags_array);
+
+            for(int step = 0; step < abbreviations.length; step++) {
+                mCurrenciesNames.put(abbreviations[step], fullNames[step]);
+                mCurrenciesFlags.put(abbreviations[step], flags.getDrawable(step));
+            }
+
+            flags.recycle();
+        }
+
     }
 }

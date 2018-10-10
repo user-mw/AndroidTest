@@ -1,5 +1,6 @@
 package com.test.androidtest.screens;
 
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.AsyncListDiffer;
 import android.support.v7.util.DiffUtil;
@@ -12,6 +13,7 @@ import com.test.androidtest.R;
 import com.test.androidtest.model.CurrencyItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,6 +25,11 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrencyViewHolder> 
 
     @Inject
     public IOnItemChangeAmount mOnItemChangeAmount;
+
+    @Inject
+    public HashMap<String, String> mFullNames;
+    @Inject
+    public HashMap<String, Drawable> mFlags;
 
     private final AsyncListDiffer<CurrencyItem> mDiffer = new AsyncListDiffer<>(this, DIFF_CALLBACK);
 
@@ -54,7 +61,10 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrencyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull CurrencyViewHolder currencyViewHolder, int i) {
-        currencyViewHolder.bind(mDiffer.getCurrentList().get(i), mItemClick, mOnItemChangeAmount);
+        CurrencyItem currentItem = mDiffer.getCurrentList().get(i);
+        currentItem.setFullName(mFullNames.get(currentItem.getAbbreviation()));
+        currentItem.setFlagResource(mFlags.get(currentItem.getAbbreviation()));
+        currencyViewHolder.bind(currentItem, mItemClick, mOnItemChangeAmount);
     }
 
     @Override

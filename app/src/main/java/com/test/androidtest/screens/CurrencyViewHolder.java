@@ -61,6 +61,7 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(CurrencyItem item, CurrenciesAdapter.IOnItemClick clickListener, CurrenciesAdapter.IOnItemChangeAmount onItemChangeAmount) {
+        mCurrencyFlag.setImageDrawable(item.getFlagResource());
         mCurrencyAbbreviation.setText(item.getAbbreviation());
         mCurrencyName.setText(item.getFullName());
         mCurrencyAmount.setText(CurrenciesStringUtil.generateAmountString(item.getValue()));

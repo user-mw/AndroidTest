@@ -58,10 +58,10 @@ public class MainScreenViewModel extends ViewModel {
                     String base = mPreferencesRepository.getBaseCurrencyValue();
                     double amount = mPreferencesRepository.getBaseCurrencyAmount();
 
-                    result.add(new CurrencyItem(amount, base, "Russian Ruble"));
+                    result.add(new CurrencyItem(amount, base));
 
                     for(Map.Entry<String, Double> value : apiResponse.getRates().entrySet()) {
-                        result.add(new CurrencyItem(amount * value.getValue(), value.getKey(), "Russian Ruble"));
+                        result.add(new CurrencyItem(amount * value.getValue(), value.getKey()));
                     }
 
                     return io.reactivex.Observable.fromArray(result);
