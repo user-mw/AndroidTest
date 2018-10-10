@@ -20,7 +20,9 @@
             android:id="@+id/currency_abbreviation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"/>
+            android:focusableInTouchMode="true"
+            android:textColor="@color/textColorBlack"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/currency_name"
