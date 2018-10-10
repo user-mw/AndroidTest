@@ -68,20 +68,6 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrencyViewHolder> 
     }
 
     public void addData(List<CurrencyItem> items) {
-//        if(items != null) {
-//            int start = 0;
-//
-//            if(mCurrencyItems.size() > 0) {
-//                if(mCurrencyItems.get(0).getAbbreviation().equals(items.get(0).getAbbreviation())) {
-//                    start = 1;
-//                }
-//
-//                mCurrencyItems.clear();
-//            }
-//
-//            mCurrencyItems.addAll(items);
-//            notifyItemRangeChanged(start, items.size());
-//        }
         mDiffer.submitList(items);
     }
 
