@@ -24,9 +24,7 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrencyViewHolder> 
     @Inject
     public IOnItemChangeAmount mOnItemChangeAmount;
 
-    private List<CurrencyItem> mCurrencyItems = new ArrayList<>();
-
-    private final AsyncListDiffer<CurrencyItem> mDiffer = new AsyncListDiffer<CurrencyItem>(this, DIFF_CALLBACK);
+    private final AsyncListDiffer<CurrencyItem> mDiffer = new AsyncListDiffer<>(this, DIFF_CALLBACK);
 
     private final static DiffUtil.ItemCallback<CurrencyItem> DIFF_CALLBACK = new DiffUtil.ItemCallback<CurrencyItem>() {
         @Override
