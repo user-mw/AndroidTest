@@ -36,6 +36,17 @@ public class MainScreenFragment extends Fragment {
         public void onClick(String newBaseCurrency, String currencyAmount) {
             mViewModel.changeBaseCurrency(newBaseCurrency, currencyAmount);
         }
+
+        @Override
+        public void onEdit(double amount, int position) {
+            mViewModel.setFreezingAmount(amount, position);
+        }
+
+        @Override
+        public void onFocusChanged(int position, double amount) {
+            mViewModel.setEditablePosition(position, amount);
+            //mViewModel.setFreezingAmount(amount, position);
+        }
     };
     private HashMap<String, String> mCurrenciesNames = new HashMap<>();
     private HashMap<String, Drawable> mCurrenciesFlags = new HashMap<>();

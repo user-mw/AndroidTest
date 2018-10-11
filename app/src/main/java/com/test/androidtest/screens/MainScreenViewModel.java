@@ -38,6 +38,9 @@ public class MainScreenViewModel extends ViewModel {
 
     private MutableLiveData<List<CurrencyItem>> mCurrencies = new MutableLiveData<>();
     private ScheduledExecutorService mExecutorService;
+    private int mEditablePosition = -1;
+    private double mFreezingAmount = -1.0;
+    private double mOriginalAmount = 0.0;
 
     @Inject
     public MainScreenViewModel() {
@@ -76,6 +79,11 @@ public class MainScreenViewModel extends ViewModel {
 
                     @Override
                     public void onNext(List<CurrencyItem> currencies) {
+                        if(mCurrencies.getValue() != null && mEditablePosition != -1 && mFreezingAmount != -1.0) {
+                            mOriginalAmount = currencies.get(mEditablePosition).getValue();
+                            currencies.get(mEditablePosition).setValue(mFreezingAmount);
+                        }
+
                         mCurrencies.postValue(currencies);
                     }
 
@@ -89,6 +97,11 @@ public class MainScreenViewModel extends ViewModel {
                         Log.d(LOG_TAG, "onComplete called");
                     }
                 });
+    }
+
+    public void setEditablePosition(int editablePosition, double amount) {
+        mEditablePosition = editablePosition;
+        mFreezingAmount = amount;
     }
 
     public void changeBaseCurrency(String newBaseCurrency, String amount) {
@@ -108,5 +121,24 @@ public class MainScreenViewModel extends ViewModel {
 
     public MutableLiveData<List<CurrencyItem>> getCurrencies() {
         return mCurrencies;
+    }
+
+    public void setFreezingAmount(double freezingAmount, int position) {
+        if(position == mEditablePosition) {
+            if(freezingAmount > 0.0) {
+                double amount = mPreferencesRepository.getBaseCurrencyAmount();
+
+                double unit;
+
+                if(mFreezingAmount != 0) {
+                    unit = amount / mFreezingAmount;
+                    mPreferencesRepository.changeBaseCurrencyAmount(unit * freezingAmount);
+                    mFreezingAmount = freezingAmount;
+                } else {
+                    mPreferencesRepository.changeBaseCurrencyAmount(mOriginalAmount / mFreezingAmount);
+                }
+            }
+        }
+
     }
 }

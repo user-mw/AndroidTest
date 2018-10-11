@@ -36,4 +36,8 @@ public class CurrencyItem {
     public void setFlagResource(Drawable flagResource) {
         mFlagResource = flagResource;
     }
+
+    public void setValue(double newValue) {
+        mValue = newValue;
+    }
 }

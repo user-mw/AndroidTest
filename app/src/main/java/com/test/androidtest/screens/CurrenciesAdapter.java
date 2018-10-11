@@ -83,6 +83,8 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrencyViewHolder> 
 
     public interface IOnItemClick {
         void onClick(String newBaseCurrency, String currencyAmount);
+        void onEdit(double amount, int position);
+        void onFocusChanged(int position, double amount);
     }
 
     public interface IOnItemChangeAmount {

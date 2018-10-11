@@ -7,7 +7,11 @@ public class CurrenciesUtil {
         double result = 0;
 
         if(!TextUtils.isEmpty(amountString)) {
-            result  = Double.parseDouble(amountString);
+            try {
+                result  = Double.parseDouble(amountString);
+            } catch (NumberFormatException exc) {
+                exc.printStackTrace();
+            }
         }
 
         return result;

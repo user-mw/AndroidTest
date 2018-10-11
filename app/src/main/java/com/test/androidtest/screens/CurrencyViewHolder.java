@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.test.androidtest.R;
 import com.test.androidtest.model.CurrencyItem;
 import com.test.androidtest.utils.CurrenciesStringUtil;
+import com.test.androidtest.utils.CurrenciesUtil;
 
 public class CurrencyViewHolder extends RecyclerView.ViewHolder {
 
@@ -48,6 +49,27 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
             mOnItemChangeAmount.onChangeAmount(editable.toString());
         }
     };
+    private TextWatcher mTextChangedListenerForOtherCurrencies = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            Log.d(CURRENCY_VIEW_HOLDER_TAG, "beforeTextChanged: called");
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            double amount = 0;
+
+            if(charSequence.length() > 0) {
+                amount = CurrenciesUtil.generateRightAmount(charSequence.toString());
+            }
+            mOnItemClick.onEdit(amount, getAdapterPosition());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            Log.d(CURRENCY_VIEW_HOLDER_TAG, "afterTextChanged: called");
+        }
+    };
 
     public CurrencyViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -79,6 +101,24 @@ public class CurrencyViewHolder extends RecyclerView.ViewHolder {
         if(getAdapterPosition() == 0) {
             mCurrencyAmount.removeTextChangedListener(mCustomTextChangedListener);
             mCurrencyAmount.addTextChangedListener(mCustomTextChangedListener);
+        } else {
+            mCurrencyAmount.setOnFocusChangeListener((view, b) -> {
+                double amount = 0;
+
+                if(mCurrencyAmount.getText().length() > 0) {
+                    amount = CurrenciesUtil.generateRightAmount(mCurrencyAmount.getText().toString());
+                }
+
+                if(b) {
+                    mOnItemClick.onFocusChanged(getAdapterPosition(), amount);
+                } else {
+                    mOnItemClick.onFocusChanged(-1, -1.0);
+                }
+
+            });
+
+            mCurrencyAmount.removeTextChangedListener(mTextChangedListenerForOtherCurrencies);
+            mCurrencyAmount.addTextChangedListener(mTextChangedListenerForOtherCurrencies);
         }
     }
 }
