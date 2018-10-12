@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.test.androidtest.R;
 import com.test.androidtest.model.CurrencyItem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

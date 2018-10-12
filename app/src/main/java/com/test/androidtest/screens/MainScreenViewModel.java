@@ -2,7 +2,6 @@ package com.test.androidtest.screens;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.test.androidtest.model.CurrencyItem;

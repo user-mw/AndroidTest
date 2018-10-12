@@ -40,6 +40,7 @@
         android:minWidth="24dp"
         android:textAlignment="textEnd"
         android:inputType="numberDecimal"
+        android:imeOptions="actionDone"
         android:hint="@string/default_hint_for_amount" />
 
 </RelativeLayout>

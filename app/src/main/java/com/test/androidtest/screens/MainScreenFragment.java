@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.test.androidtest.MainApplication;
 import com.test.androidtest.R;
@@ -45,7 +44,6 @@ public class MainScreenFragment extends Fragment {
         @Override
         public void onFocusChanged(int position, double amount) {
             mViewModel.setEditablePosition(position, amount);
-            //mViewModel.setFreezingAmount(amount, position);
         }
     };
     private HashMap<String, String> mCurrenciesNames = new HashMap<>();
